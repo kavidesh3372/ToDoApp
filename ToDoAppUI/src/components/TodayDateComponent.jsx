@@ -4,30 +4,41 @@ import { fadeIn } from "../utils/motion";
 
 function getDate() {
     const today = new Date();
-    const formattedDate = today.toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
+    const formattedDate = today.toLocaleDateString('en-US', { 
+        day: 'numeric', 
+        month: 'long',
+        timeZone: 'Asia/Kolkata'
+    });
     return `${formattedDate}`;
-  }
+}
   
-  function getTime() {
+ function getTime() {
     const today = new Date();
-    const hour = today.getHours().toString().padStart(2, '0');
-    const min = today.getMinutes().toString().padStart(2, '0');
-    const sec = today.getSeconds().toString().padStart(2, '0');
+    const indianTime = new Date(today.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+    const hour = indianTime.getHours().toString().padStart(2, '0');
+    const min = indianTime.getMinutes().toString().padStart(2, '0');
+    const sec = indianTime.getSeconds().toString().padStart(2, '0');
     return `${hour}:${min}`;
-  }
+}
   
-  function getYear() {
+function getYear() {
     const today = new Date();
-    const year = today.getFullYear();
+    const year = today.toLocaleDateString('en-US', {
+        year: 'numeric',
+        timeZone: 'Asia/Kolkata'
+    });
     return `${year}`;
-  }
+}
   
-  function getDay() {
+function getDay() {
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const today = new Date();
-    const day = daysOfWeek[today.getDay()];
+    // Use Indian timezone for day
+    const dayIndex = new Date(today.toLocaleString("en-US", {timeZone: "Asia/Kolkata"})).getDay();
+    const day = daysOfWeek[dayIndex];
     return `${day}`;
-  }
+}
+
 
 const DateDisplay = () =>{
     
